@@ -21,7 +21,7 @@ function NavBar() {
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [searchQuery, setSearchQuery] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   return (
 
@@ -35,13 +35,15 @@ function NavBar() {
           BookRadio
           </NavLink>
         </NavbarBrand>
-        <NavbarMenuToggle
+        {/* <NavbarMenuToggle
       icon={isMenuOpen?<XIcon />:<MenuIcon/>}
-      className='md:hidden'/>
+      className='md:hidden'/> */}
         </NavbarContent>
 
 
-        <NavbarContent className='flex-grow gap-8 '
+
+        <NavbarContent className='
+        flex-grow gap-8 '
         justify='center'>
 
         <NavbarItem className='cursor-pointer px-0  w-full md:w-2/4'>
@@ -79,14 +81,15 @@ function NavBar() {
             type='search' />
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent  className='flex-grow gap-8 hidden md:flex'
-        justify='start'
+
+        {/* <NavbarContent  className='flex-grow gap-8 hidden md:flex '
+        justify='start '
         
         >
           
           <NavbarItem >
-            {/* <NavLink to={`/audiobooks`}> */}
-            <Button 
+            
+             <Button 
             as={Link}
             className=' font-poppins font-bold
             text-xl
@@ -95,16 +98,16 @@ function NavBar() {
             radius='sm' onClick={()=>{
               navigate('/audiobooks')
             }}>
-            Audiobooks</Button>
-           {/* / </NavLink> */}
+            Audiobooks</Button> 
+           
            
           
             
            
           </NavbarItem>
           <NavbarItem >
-          {/* <NavLink to={`/genres`}> */}
-            <Button className=' font-poppins font-bold
+          
+             <Button className=' font-poppins font-bold
             text-xl
            text-neutral-700 hover:bg-neutral-40'
             variant='light'
@@ -112,18 +115,17 @@ function NavBar() {
               navigate('/genres')
             }}>
             Genres
-            </Button>
+            </Button> 
             
-            {/* </NavLink> */}
           </NavbarItem>
           <NavbarItem>
-          {/* <NavLink to={`/authors`}>
+           <NavLink to={`/authors`}>
             Authors
-            </NavLink> */}
+            </NavLink> 
           </NavbarItem>
           
-        </NavbarContent>
-        <NavbarMenu className='pt-8 gap-1'>
+        </NavbarContent> */}
+        {/* <NavbarMenu className='pt-8 gap-1'>
         
           <NavbarMenuItem className='text-center' onClick={()=>{
             console.log('clicked')
@@ -133,7 +135,6 @@ function NavBar() {
             
            
            
-          {/* <NavLink to={`/audiobooks`}> */}
             <Button
             href='/audiobooks'
             className=' font-poppins font-bold
@@ -149,7 +150,6 @@ function NavBar() {
             Audiobooks
             </Button>
             
-            {/* </NavLink> */}
         
           
             
@@ -161,7 +161,6 @@ function NavBar() {
             setIsMenuOpen(false)
           }}>
          
-          {/* <NavLink to={`/genres`}> */}
           <Button className=' font-poppins font-bold
             text-xl
            text-neutral-700 hover:bg-neutral-40 w-full'
@@ -172,11 +171,10 @@ function NavBar() {
             }}>
             Genres
             </Button>
-            {/* </NavLink> */}
           
           </NavbarMenuItem>
         
-      </NavbarMenu>
+      </NavbarMenu> */}
 
     </Navbar>
   )

@@ -15,7 +15,7 @@ function Audiobookcard({audiobook}) {
         const parts = url.split('/');
 const lastPart = parts[parts.length - 1];
 
-console.log(lastPart);
+//console.log(lastPart);
 return lastPart
     }
 

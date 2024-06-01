@@ -29,7 +29,7 @@ function App() {
     <div className='flex flex-col bg-neutral-100 w-full overflow-auto h-full '>
       <NavBar/>
       <Content  />
-    <Footer/>
+    {/* <Footer/> */}
       
 
      
