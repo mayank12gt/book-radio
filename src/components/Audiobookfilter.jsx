@@ -8,7 +8,7 @@ import { genres,languages } from '../api/data'
 import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
-function Audiobookfilter() {
+function Audiobookfilter({onClose}) {
 
  const [searhParams, setSearchparams] = useSearchParams();
 
@@ -223,6 +223,7 @@ const handleApplyClick =()=>{
               createLangFilterParam()!=''? searhParams.append("language",createLangFilterParam()):null
 
              setSearchparams(searhParams)
+             onClose()
 
 }
 

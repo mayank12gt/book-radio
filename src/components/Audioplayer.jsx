@@ -1,219 +1,137 @@
-import React from 'react'
-import { Button, Slider, Spacer, Spinner } from '@nextui-org/react'
-import { useAudioPlayerStore } from '../store'
-import { useEffect, useRef, useState } from 'react'
-
-import { PauseIcon, PlayIcon, SkipBackIcon, SkipForwardIcon } from 'lucide-react'
-
+import React from 'react';
+import { Button, Slider, Spacer, Spinner } from '@nextui-org/react';
+import { useAudioPlayerStore } from '../store';
+import { useEffect, useRef, useState } from 'react';
+import { PauseIcon, PlayIcon, SkipBackIcon, SkipForwardIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 function Audioplayer() {
+  const audioRef = useRef(null);
 
-  const audioRef = useRef(null)
+  const navigate = useNavigate()
 
-  const [currentEpisode, setCurrentEpisode] = useState()
+  const [currentEpisode, setCurrentEpisode] = useState();
+  const [currentTime, setCurrentTime] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [currentTime, setCurrentTime] = useState(0)
+  const audiobook = useAudioPlayerStore((state) => state.audiobook);
 
-  const [Loading,setLoading] = useState(true)
+  const playlist = useAudioPlayerStore((state) => state.playlist);
+  const toggleAudioPlay = useAudioPlayerStore((state) => state.toggleAudioPlay);
+  const playNext = useAudioPlayerStore((state) => state.playNext);
+  const playPrevious = useAudioPlayerStore((state) => state.playPrevious);
 
-  const [Error,setError] = useState(null)
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
 
-
-
-
-  const playlist = useAudioPlayerStore((state)=>state.playlist)
-
-
-
-  // const playAudio = useAudioPlayerStore((state)=>state.playAudio)
-
-  
-   const toggleAudioPlay = useAudioPlayerStore((state)=>state.toggleAudioPlay)
-
-   const playNext = useAudioPlayerStore((state)=>state.playNext)
-
-   const playPrevious = useAudioPlayerStore((state)=>state.playPrevious)
-
-
-
-
-  const updateProgress =  ()=>{
-    console.log("update time called")
-    if(audioRef.current){
-    setCurrentTime(audioRef.current.currentTime/60)
+  const updateProgress = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
     }
-  }
- 
+  };
 
-
-
-   const handlePlayPause = ()=>{
-    if (audioRef.current){
-     
-      toggleAudioPlay()
-  }
-}
-
-  
-
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      toggleAudioPlay();
+    }
+  };
 
   useEffect(() => {
-
-  // console.log("Playlist"+JSON.stringify(playlist))
-
-    setCurrentEpisode(playlist?.find((ep)=>{
-    return ep?.isCurrent===true
-  }))
-
-  //console.log(currentEpisode)
-   
-  }, [playlist])
+    setCurrentEpisode(
+      playlist?.find((ep) => {
+        return ep?.isCurrent === true;
+      })
+    );
+  }, [playlist]);
 
   useEffect(() => {
-    console.log("current episode changed")
+    if (audioRef.current) {
+      audioRef.current.addEventListener('timeupdate', updateProgress);
+      audioRef.current.addEventListener('error', (e) => setError(e));
+      audioRef.current.addEventListener('loadstart', () => setLoading(true));
+      audioRef.current.addEventListener('waiting', () => setLoading(true));
+      audioRef.current.addEventListener('ended', playNext);
+      audioRef.current.addEventListener('canplay', () => setLoading(false));
+      audioRef.current.addEventListener('loadedmetadata', () => setLoading(false));
 
-      if(audioRef.current){
-    audioRef.current.addEventListener('timeupdate',updateProgress)
+      currentEpisode?.isPlaying ? audioRef.current.play() : audioRef.current.pause();
+    }
 
-    audioRef.current.addEventListener('error',(e)=>{setError(e)
-    })
-
-    audioRef.current.addEventListener('loadstart',()=>setLoading(true))
-
-
-    audioRef.current.addEventListener('waiting',()=>setLoading(true))
-
-    audioRef.current.addEventListener('ended',playNext)
-
-
-    currentEpisode?.isPlaying?
-    audioRef.current.play():audioRef.current.pause()
-
-
-    audioRef.current.addEventListener('canplay',()=>setLoading(false))
-
-    audioRef.current.addEventListener('loadedmetadata',()=>setLoading(false))
-      }
-  
     return () => {
-      if (audioRef.current){
-        audioRef.current.removeEventListener('timeupdate',updateProgress)
-
-        audioRef.current.removeEventListener('canplay',()=>setLoading(false))
-
-    audioRef.current.removeEventListener('loadedmetadata',()=>setLoading(false))
-
-    audioRef.current.removeEventListener('waiting',()=>setLoading(true))
-
-    audioRef.current.removeEventListener('loadstart',()=>setLoading(true))
-
-    audioRef.current.removeEventListener('error',(r)=>{
-      console.log(e)
-      setError(e)})
-
-
-
-
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('timeupdate', updateProgress);
+        audioRef.current.removeEventListener('canplay', () => setLoading(false));
+        audioRef.current.removeEventListener('loadedmetadata', () => setLoading(false));
+        audioRef.current.removeEventListener('waiting', () => setLoading(true));
+        audioRef.current.removeEventListener('loadstart', () => setLoading(true));
+        audioRef.current.removeEventListener('error', (e) => setError(e));
       }
-    }
-  }, [currentEpisode])
-  
-  if (Error){
-    return <p>
-      {Error}
-    </p>
+    };
+  }, [currentEpisode]);
+
+  if (error) {
+    return <p>{error.message}</p>;
   }
-
-
 
   return (
     <div>
-      {playlist&&
+      {playlist && (
+        <div className="bg-neutral-200 pt-2  cursor-pointer "  onClick={()=>{
+          navigate(`/audiobooks/${audiobook?.id}`)
+        }}>
+          <div className="flex flex-row justify-center gap-2">
+            <Button radius="full" variant="solid" isIconOnly onClick={playPrevious}>
+              <SkipBackIcon />
+            </Button>
 
-     
-    <div className=' bg-neutral-200  pt-2'>
-        <div className='flex flex-row justify-center gap-2'>
-          <Button
-          radius='full'
-          variant='solid'
-          isIconOnly
-          onClick={playPrevious}
-          >
-          <SkipBackIcon/>
-          </Button>
+            <Button variant="light" radius="full" isIconOnly onClick={handlePlayPause}>
+              {loading ? (
+                <Spinner className="" />
+              ) : currentEpisode?.isPlaying ? (
+                <PauseIcon />
+              ) : (
+                <PlayIcon />
+              )}
+            </Button>
 
-          <Button
-          variant='light'
-          radius='full'
-          isIconOnly
-          onClick={handlePlayPause}
-
-          >
-          {/* { audioPlayer?.isPlaying? <PauseIcon/>:<PlayIcon/>} */}
-          {
-            Loading?<Spinner className='fill-red-700' />:currentEpisode?.isPlaying?<PauseIcon/>:<PlayIcon/>
-          }
-          </Button>
-
-          <Button
-          radius='full'
-          variant='solid'
-          isIconOnly
-          onClick={playNext}
-          >
-          <SkipForwardIcon/>
-          </Button>
-
-
+            <Button radius="full" variant="solid" isIconOnly onClick={playNext}>
+              <SkipForwardIcon />
+            </Button>
+          </div>
+          <div className="flex flex-row justify-center" >
+            <p className="text-center font-semibold text-md font-poppins line-clamp-1">
+              {currentEpisode?.title+" | "+audiobook?.title}
+            </p>
+          </div>
+          <div className="flex flex-row gap-2 px-2">
+            <p className="font-poppins w-12">{formatTime(currentTime)}</p>
+            <Slider
+              size="sm"
+              color="foreground"
+              value={currentTime}
+              onChange={(val) => {
+                setCurrentTime(val);
+                if (audioRef.current) {
+                  audioRef.current.currentTime = val;
+                }
+              }}
+              maxValue={currentEpisode?.playtime || 0}
+              step={0.01}
+              aria-label="Seek-bar"
+            />
+            <p className="font-poppins w-12">{formatTime(currentEpisode?.playtime || 0)}</p>
+          </div>
+          <audio autoPlay key={currentEpisode?.listen_url} ref={audioRef}>
+            <source src={currentEpisode?.listen_url} type="audio/mpeg" />
+          </audio>
         </div>
-        <div className='flex flex-row justify-center'>
-
-        
-        <p className='text-center font-semibold text-lg font-poppins line-clamp-1'>
-          {currentEpisode?.title}
-        </p>
-
-        
-        </div>
-        <div className='flex flex-row gap-2 px-2'>
-
-       
-        <p className='font-poppins'>
-        {
-         currentTime.toFixed(2)
-        }
-        </p>
-        { <Slider size='sm' color='foreground'
-        value={currentTime}
-        // onChangeEnd={(val)=>{console.log(val)}}
-        onChange={(val)=>{
-          console.log(val)
-          setCurrentTime(val)
-          audioRef.current.currentTime = val*60
-        }}
-        maxValue={(parseFloat
-          (currentEpisode?.playtime)/60).toFixed(2)}
-        step={0.01}
-        aria-label='Seek-bar'
-        className=''
-        /> }
-        <p className='font-poppins'>
-        {(parseFloat
-          (currentEpisode?.playtime)/60).toFixed(2)}
-        </p>
-
-        </div>
-
-        <audio autoPlay key={currentEpisode?.listen_url} ref={audioRef}>
-          <source src={currentEpisode?.listen_url} type='audio/mpeg'/>
-
-        </audio>
-
-
-</div>
- }
- </div>
-  )
+      )}
+    </div>
+  );
 }
 
-export default Audioplayer
+export default Audioplayer;

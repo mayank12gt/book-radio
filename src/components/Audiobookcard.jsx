@@ -7,9 +7,7 @@ function Audiobookcard({audiobook}) {
 
     const navigate = useNavigate()
 
-    const formatTime = (time)=>{
-
-    }
+    
 
     const getGutendexId =(url)=>{
         const parts = url.split('/');
@@ -18,6 +16,19 @@ const lastPart = parts[parts.length - 1];
 //console.log(lastPart);
 return lastPart
     }
+
+    const formatTime = (time) => {
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        // const seconds = Math.floor(time % 60);
+        if (hours!=0){
+          return `${hours} hours`
+        }else{
+          return `${minutes} minutes`
+        }
+    
+        
+      };
 
 
   return (
@@ -50,7 +61,7 @@ return lastPart
 
             
             <p className='text-lg font-semibold font-poppins text-neutral-600 '>
-                {audiobook.totaltime}
+                {formatTime(audiobook.totaltimesecs)}
             </p>
             <p className='text-lg font-semibold font-poppins text-neutral-600'>
                 {audiobook.language}

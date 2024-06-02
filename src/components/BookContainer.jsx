@@ -22,6 +22,11 @@ function BookContainer() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure()
 
 
+useEffect(() => {
+  console.log("Open state"+isOpen)
+
+ 
+}, [isOpen])
 
 
  const [searhParams, setSearchparams] = useSearchParams();
@@ -30,6 +35,7 @@ function BookContainer() {
 
  const res = useQuery({queryKey:["books",searhParams.get("search")??"",searhParams.get("genres")??"",searhParams.get("durationMin")??"",searhParams.get("durationMax")??"",searhParams.get("language")??"",searhParams.get("page")==null?1:searhParams.get("page")],queryFn:fetchBooks,
     staleTime:1000*60*5,
+    
   })
 // console.log(searhParams)
 //   console.log(searhParams.get("page"))
@@ -40,20 +46,22 @@ function BookContainer() {
       return <Spinner className='mx-auto my-auto'/>
     }
     if (res.isError){
-      return <Card className='max-w-[40%] mx-auto my-auto text-neutral-700 bg-neutral-200'
+      return <Card className='max-w-[400px] mx-auto my-auto text-neutral-700 bg-red-200'
       shadow='none'
+      
       radius='sm'
       >
-        <CardHeader className='font-poppins font-bold text-2xl'>
+        <CardHeader className='font-poppins font-bold text-2xl justify-center'>
           Error
         </CardHeader>
-        <CardBody>
-        <p className='font-poppins font-semibold text-lg'>
+        <CardBody className='pt-0'>
+        <p className='font-poppins font-semibold text-lg text-center '  >
         
-        Something went wrong
+        {res?.error?.response?.status==404?"No audiobooks found for the applied filter. Try something different":"Something went wrong. Please try again later"}
         
         </p>
-        <Button className='font-poppins font-semibold bg-neutral-200'  variant='flat' onClick={()=>{
+        
+        <Button className='font-poppins font-semibold mt-3'  variant='flat' radius='sm' color='success'  onClick={()=>{
           navigator('/')
         }} >  
             Back to Home
@@ -63,9 +71,10 @@ function BookContainer() {
     }
   
   return (
+    res.isSuccess&&
     <div className='flex flex-1'>
       <div className='w-1/6 min-w-[260px] hidden md:block border-r-2 '>
-        <Audiobookfilter />
+        <Audiobookfilter onOpenChange={onOpenChange} />
       </div>
     
       <div className='flex flex-col gap-4'>
@@ -86,14 +95,18 @@ function BookContainer() {
 
      <Modal isOpen={isOpen} size='md' onOpenChange={onOpenChange} radius='md'>
       <ModalContent>
+      {(onClose) => (
+            <>
+
         <ModalHeader className=' p-2 justify-center font-poppins font-bold text-neutral-700'>
           Filter Audiobooks
         </ModalHeader>
         <ModalBody className='p-0'>
 
-        <Audiobookfilter/>
+        <Audiobookfilter onClose = {onClose}/>
 
         </ModalBody>
+        </>)}
 
       </ModalContent>
 
@@ -163,7 +176,7 @@ function BookContainer() {
           setSearchparams(searhParams)
       
       }}
-      className='self-center font-medium font-poppins' radius='sm' total={res.data.data.metadata.last_page} page={res?.data?.data?.metadata?.current_page}/>
+      className='self-center font-medium font-poppins' radius='sm' total={res?.data?.data?.metadata?.last_page} page={res?.data?.data?.metadata?.current_page}/>
     </div>
     </div>
    

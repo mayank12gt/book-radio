@@ -10,6 +10,12 @@ function Episodecard({episode,setPlist}) {
 
     const togglePlayAudio = useAudioPlayerStore((state)=>state.togglePlayAudio)
 
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      };
+
 
     
     
@@ -36,7 +42,9 @@ function Episodecard({episode,setPlist}) {
             isIconOnly
             radius='full'
             className=''
-            onClick={togglePlayAudio}>
+            onClick={()=>{
+                //console.log('click')
+                togglePlayAudio}}>
                 {
                 playlist?.find(ep=>ep.isCurrent)?.id === episode.id && playlist?.find(ep=>ep.isCurrent)?.isPlaying? <CirclePause/>:<CirclePlay/>
                 }
@@ -53,7 +61,7 @@ function Episodecard({episode,setPlist}) {
                     </p>
                     <p className='text-xl text-neutral-500 font-semibold font-poppins'>
                         {
-                            (episode.playtime/60).toFixed(2) + ' mins'
+                          formatTime(episode?.playtime)  
                         }
                     </p>
                 </div>

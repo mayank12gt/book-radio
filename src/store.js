@@ -2,10 +2,14 @@ import { create } from "zustand";
 
 export const useAudioPlayerStore = create((set)=>({
     playlist : null,
+    audiobook : null,
     //episode : null,
 
     setPlaylist : (plist)=>set({
         playlist : plist}),
+
+        setAudiobook : (audiobook)=>set({
+          audiobook : audiobook}),
 
     // getCurrEpisode : ()=>set((state)=>{
     //     playlist : plist}),

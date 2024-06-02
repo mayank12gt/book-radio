@@ -17,7 +17,7 @@ const [isExpanded, setIsExpanded] = useState(false)
     const parts = url.split('/');
 const lastPart = parts[parts.length - 1];
 
-console.log(lastPart);
+//console.log(lastPart);
 return lastPart
 }
 
@@ -32,8 +32,23 @@ return lastPart
 
 
 
+  const formatTime = (time) => {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    // const seconds = Math.floor(time % 60);
+    if (hours!=0){
+      return `${hours} hours`
+    }else{
+      return `${minutes} minutes`
+    }
+
+    
+  };
+
   
 const setPlaylist = useAudioPlayerStore((state)=>state.setPlaylist)
+
+const setAudiobook = useAudioPlayerStore((state)=>state.setAudiobook)
 
 const setPlist = (episode)=>{
   const playlistStore = audiobook?.sections?.map((ep)=>{
@@ -46,6 +61,8 @@ const setPlist = (episode)=>{
 
  console.log(playlistStore)
  setPlaylist(playlistStore)
+ setAudiobook({id:audiobook?.id,title:audiobook?.title})
+ 
 }
 
   if (res.isLoading){
@@ -82,18 +99,21 @@ const setPlist = (episode)=>{
             {audiobook.authors[0].first_name+" "+ audiobook.authors[0].last_name}
             </p>
 
-            <div className='flex flex-row justify-evenly pt-2 overflow-x-auto'>
+            <div className='flex flex-row justify-evenly pt-2 overflow-x-auto items-stretch'>
 
             <p className='text-lg font-semibold font-poppins text-neutral-600 '>
-                {audiobook?.totaltime}
+                {formatTime(audiobook?.totaltimesecs)}
             </p>
+            
             <p className='text-lg font-semibold font-poppins text-neutral-600'>
                 {audiobook?.language}
             </p>
+            
             <p className='text-lg font-semibold font-poppins text-neutral-600'>
                 {audiobook?.copyright_year}
             </p>
         </div>
+      
 
 
 
@@ -124,16 +144,18 @@ const setPlist = (episode)=>{
 
         
 
-        <Button className='mt-2 text-xl font-poppins font-semibold text-slate-200' radius='sm'
+        {/* <Button className='mt-2 text-xl font-poppins font-semibold text-slate-200' radius='sm'
         onClick={()=>{
           document.getElementById('episodes-section').scrollIntoView({behavior:'smooth'})
+
+
         }}
         color='primary'
         startContent={
           <CirclePlayIcon/>
         } >
           Play
-        </Button>
+        </Button> */}
 
          
 
