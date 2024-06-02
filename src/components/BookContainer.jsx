@@ -114,49 +114,7 @@ useEffect(() => {
 
 
       <div className='text-9xl flex justify-center flex-wrap gap-8 m-4 content-start'>
-      {/* <p className='text-8xl  w-fit'>
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-      Hey
-
-
-
-
-
-      </p> */}
+      
 
       {res?.data?.data?.audiobooks?.map((audiobook)=>{
         //console.log(audiobook.id)

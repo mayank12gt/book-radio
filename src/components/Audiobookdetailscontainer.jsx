@@ -87,6 +87,7 @@ const setPlist = (episode)=>{
             height={'300'}
             className='w-[200px] '
             src={`https://www.gutenberg.org/cache/epub/${getGutendexId(audiobook.url_text_source)}/pg${getGutendexId(audiobook.url_text_source)}.cover.medium.jpg`}
+            fallbackSrc={'/placeholder.jpg'}
             
             />
       <div className='flex-col flex flex-1 md:ms-4 mt-2 self-stretch'>
