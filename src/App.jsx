@@ -25,7 +25,7 @@ function App() {
 
   
   return (
-    <div className='h-screen w-screen flex flex-col overflow-y-hidden'>
+    <div className='h-dvh w-screen flex flex-col overflow-y-hidden'>
     <div className='flex flex-col bg-neutral-100 w-full overflow-auto h-full '>
       <NavBar/>
       <Content  />

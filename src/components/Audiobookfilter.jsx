@@ -114,60 +114,57 @@ const createDurationFilterParam = ()=>{
    return [durationfilterMin,durationfilterMax]
 }
 
-// const createDurationFilterCode = ()=>{}
+const createDurationFilterCode = ()=>{
 
-//   const min = searhParams.get("durationMin")
+  let durationFilterCode
 
-//   const max = searhParams.get("durationMax")
+  const min = parseInt(searhParams.get("durationMin"))
+
+  const max = parseInt(searhParams.get("durationMax"))
+
+  switch (`${min}-${max}`) {
+    case "1-20":{
+      durationFilterCode=1
+      break;
+    }
+    case "20-60":
+      {
+        durationFilterCode=2
+
+      break;
+      }
+    case "60-180":
+      {
+        durationFilterCode=3
+
+      break;
+      }
+      case "180-480":
+      {
+        durationFilterCode=4
+
+      break;
+      }
+      case "480-720":
+     {
+      durationFilterCode=5 
+      break;
+     }
+      case "720-6000":{
+        durationFilterCode=6
+        break;
+      }
+    default:{
+        durationFilterCode=0
+    }
+
+   
+  }
 
 
+   return durationFilterCode
+}
 
-//    switch (durationFilter){
-//     case 1:
-//       {
-//         durationfilterMin=1,
-//         durationfilterMax=20
-//         break;
-//       }
-//       case 2:
-//       {
-//         durationfilterMin=20,
-//         durationfilterMax=60
-//         break;
-//       }
-//       case 3:
-//       {
-//         durationfilterMin=60,
-//         durationfilterMax=180
-//         break;
-//       }
-//       case 4:
-//       {
-//         durationfilterMin=180,
-//         durationfilterMax=480
-//         break;
-//       }
-//       case 5:
-//       {
-//         durationfilterMin=480,
-//         durationfilterMax=720
-//         break;
-//       }
-//       case 6:
-//       {
-//         durationfilterMin=720,
-//         durationfilterMax=6000
-//         break;
-//       }
-//       default:{
-//         durationfilterMin=0,
-//         durationfilterMax=0
-//       }
-    
-//    }
-
-//    return [durationfilterMin,durationfilterMax]
-// }
 
 
 
@@ -234,14 +231,14 @@ const handleApplyClick =()=>{
 useEffect(() => {
   const g = searhParams.get("genres")
   // console.log(g)
-  const durMin = searhParams.get("durationMin")
-  const durMax = searhParams.get("durationMax")
+  // const durMin = searhParams.get("durationMin")
+  // const durMax = searhParams.get("durationMax")
 
 
   
 
   setGenreFilter(g?.split(","))
-  // setDurationFilter()
+   setDurationFilter(createDurationFilterCode())
   setLanguageFilter([searhParams.get("language")])
 }, [])
 

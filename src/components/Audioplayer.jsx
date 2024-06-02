@@ -59,7 +59,7 @@ function Audioplayer() {
 
   useEffect(() => {
 
-  console.log("Playlist"+JSON.stringify(playlist))
+  // console.log("Playlist"+JSON.stringify(playlist))
 
     setCurrentEpisode(playlist?.find((ep)=>{
     return ep?.isCurrent===true
