@@ -83,9 +83,9 @@ const setPlist = (episode)=>{
                   <Image
             shadow="none"
             radius='sm'
-            width={'200'}
+            width={'260'}
             height={'300'}
-            className='w-[200px] '
+            
             src={`https://www.gutenberg.org/cache/epub/${getGutendexId(audiobook.url_text_source)}/pg${getGutendexId(audiobook.url_text_source)}.cover.medium.jpg`}
             fallbackSrc={'/placeholder.jpg'}
             
