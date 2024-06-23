@@ -78,7 +78,23 @@ function NavBar() {
             </Button>}
 
 
-            type='search' />
+            type='search'
+             onKeyDown={(e)=>{
+              if(e.key=='Enter'){
+                // console.log("presses enter")
+                setIsMenuOpen(false)
+              const params = new URLSearchParams({
+                search:searchQuery??""
+              })
+              navigate({ pathname: `/audiobooks`,
+                search: `?${params.toString()}`,
+              })
+
+
+              }
+             }}
+            
+            />
           </NavbarItem>
         </NavbarContent>
 
