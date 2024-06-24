@@ -132,7 +132,7 @@ const setPlist = (episode)=>{
 
 
 
-        <div className='gap-2 flex flex-row mt-4'>{
+        <div className='gap-2 flex flex-row mt-4 overflow-auto'>{
         audiobook.genres.map((genre)=>{
                     return <Chip key={genre.id} className='bg-neutral-200'  radius='sm'>
                     <p className=' text-blue-500 font-semibold font-poppins text-md'>
