@@ -77,7 +77,7 @@ const setPlist = (episode)=>{
   }
 
   return (
-    <div className=' max-w-screen-lg mx-auto px-2 pt-2'>
+    <div className=' max-w-screen-lg mx-auto w-full px-2 pt-2'>
     <div className='flex flex-col md:flex-row items-center md:items-start '>
       
                   <Image
