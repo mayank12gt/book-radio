@@ -81,11 +81,13 @@ function Audioplayer() {
 
   useEffect(()=>{
     console.log(skipIntro)
+    if(currentEpisode){
     if (skipIntro) {
       notifySkipOn()
     }else{
       notifySkipOff()
     }
+  }
   },[skipIntro])
 
 
