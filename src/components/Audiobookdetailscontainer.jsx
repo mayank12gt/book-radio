@@ -91,7 +91,7 @@ const setPlist = (episode)=>{
             
             />
       <div className='flex-col flex flex-1 md:ms-4 mt-2 self-stretch'>
-        <p className='text-neutral-700 text-3xl font-bold font-poppins text-center'>
+        <p className='text-neutral-700 text-2xl font-bold font-poppins text-center'>
           {audiobook.title}
         </p>
         
@@ -165,7 +165,7 @@ const setPlist = (episode)=>{
     </div>
 
     <div className='mt-3'>
-      <p className='text-3xl font-bold text-neutral-700 font-poppins  text-center'>
+      <p className='text-2xl font-bold text-neutral-700 font-poppins  text-center'>
         Episodes
       </p>
       {/* <Divider/> */}
