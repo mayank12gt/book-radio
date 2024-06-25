@@ -38,15 +38,15 @@ return lastPart
     onClick={()=>{
         navigate(`/audiobooks/${audiobook.id}`)
     }}
-    className='bg-transparent max-w-[250px]'>
+    className='bg-transparent max-w-[300px]'>
         
-        <CardBody className='max-w-full items-center p-1 max-h-fit  flex-grow-0 flex-shrink-0 overflow-hidden'>
+        <CardBody className='max-w-full items-center p-1 max-h-fit  flex-grow-0 flex-shrink-0 overflow-hidden '>
             <Image
             shadow="none"
             radius='sm'
             width={'240'}
             height={'300'}
-            className='h-[300px]'
+            className='h-[270px] md:h-[300px]'
             src={`https://www.gutenberg.org/cache/epub/${getGutendexId(audiobook.url_text_source)}/pg${getGutendexId(audiobook.url_text_source)}.cover.medium.jpg`}
              fallbackSrc={'/placeholder.jpg'}
             />

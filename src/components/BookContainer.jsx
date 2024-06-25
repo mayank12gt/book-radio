@@ -77,7 +77,7 @@ useEffect(() => {
         <Audiobookfilter onOpenChange={onOpenChange} />
       </div>
     
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-4 w-full'>
 
       
    
@@ -113,7 +113,7 @@ useEffect(() => {
     </Modal>
 
 
-      <div className='text-9xl flex justify-center flex-wrap gap-8 m-4 content-start'>
+      <div className='text-9xl md:flex md:justify-center md:flex-wrap md:gap-8 m-1 md:m-4 md:content-start grid grid-cols-2 gap-2'>
       
 
       {res?.data?.data?.audiobooks?.map((audiobook)=>{
