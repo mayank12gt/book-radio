@@ -1,13 +1,10 @@
 import { Card, CardBody, CardFooter, CardHeader, Chip, Image } from '@nextui-org/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
 function Audiobookcard({audiobook}) {
 
-    const navigate = useNavigate()
-
-    
 
     const getGutendexId =(url)=>{
         const parts = url.split('/');
@@ -16,6 +13,19 @@ const lastPart = parts[parts.length - 1];
 //console.log(lastPart);
 return lastPart
     }
+
+    const handleImageError = ()=>{
+        setImage(`/placeholder.jpg`)
+    }
+
+    const navigate = useNavigate()
+    const [image, setImage] = useState(`https://www.gutenberg.org/cache/epub/${getGutendexId(audiobook.url_text_source)}/pg${getGutendexId(audiobook.url_text_source)}.cover.medium.jpg`)
+
+
+
+    
+
+ 
 
     const formatTime = (time) => {
         const hours = Math.floor(time / 3600);
@@ -43,12 +53,14 @@ return lastPart
         <CardBody className='max-w-full items-center p-1 max-h-fit  flex-grow-0 flex-shrink-0 overflow-hidden '>
             <Image
             shadow="none"
-            radius='sm'
+            radius='md'
             width={'240'}
             height={'300'}
+    
             className='h-[270px] md:h-[300px]'
-            src={`https://www.gutenberg.org/cache/epub/${getGutendexId(audiobook.url_text_source)}/pg${getGutendexId(audiobook.url_text_source)}.cover.medium.jpg`}
-             fallbackSrc={'/placeholder.jpg'}
+            src={image}
+            onError={handleImageError}
+            
             />
             <p className='text-xl font-bold font-poppins text-center text-neutral-700 self-stretch mt-2 line-clamp-2'>
                 {audiobook.title}
