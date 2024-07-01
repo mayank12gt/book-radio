@@ -28,6 +28,7 @@ function Audioplayer() {
   const audiobook = useAudioPlayerStore((state) => state.audiobook);
 
   const playlist = useAudioPlayerStore((state) => state.playlist);
+
   const toggleAudioPlay = useAudioPlayerStore((state) => state.toggleAudioPlay);
   const playNext = useAudioPlayerStore((state) => state.playNext);
   const playPrevious = useAudioPlayerStore((state) => state.playPrevious);
@@ -89,6 +90,17 @@ function Audioplayer() {
     }
   }
   },[skipIntro])
+
+  useEffect(()=>{
+    if (playlist){
+      const lastPlayed = {
+        audiobook:audiobook,
+        playlist:playlist
+      }
+    localStorage.setItem("continue-listening", JSON.stringify(lastPlayed));
+    }
+
+  },[currentEpisode])
 
 
   useEffect(() => {

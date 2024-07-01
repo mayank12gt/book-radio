@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react';
-import {MenuIcon, Search, SearchIcon, SidebarCloseIcon, XIcon} from 'lucide-react'
+import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Switch } from '@nextui-org/react';
+import {FilterIcon, MenuIcon, MoonIcon, Search, SearchIcon, SidebarCloseIcon, SunIcon, XIcon} from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 function NavBar() {
@@ -38,6 +38,16 @@ function NavBar() {
         {/* <NavbarMenuToggle
       icon={isMenuOpen?<XIcon />:<MenuIcon/>}
       className='md:hidden'/> */}
+         <NavbarItem >
+      
+          
+          
+         
+           
+          
+      </NavbarItem>
+
+
         </NavbarContent>
 
 
@@ -97,6 +107,8 @@ function NavBar() {
             />
           </NavbarItem>
         </NavbarContent>
+
+        
 
         {/* <NavbarContent  className='flex-grow gap-8 hidden md:flex '
         justify='start '
