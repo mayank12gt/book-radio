@@ -40,7 +40,7 @@ function NavBar() {
       className='md:hidden'/> */}
          <NavbarItem className='md:hidden ml-auto ' >
 
-         <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support Mayank&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
+         <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support BookRadio&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
       
           
           
@@ -111,7 +111,7 @@ function NavBar() {
           
           <NavbarItem className='ml-auto hidden md:block' >
 
-          <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support Mayank&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
+          <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support BookRadio&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
 
  
  
