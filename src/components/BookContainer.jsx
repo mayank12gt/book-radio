@@ -87,18 +87,19 @@ useEffect(() => {
         
     <Continuelistening/>
    
-   <div className='md:hidden mx-auto mt-2'>
+   <div className='md:hidden mt-2 flex flex-col gap-2'>
     
    
-      <Button className='font-semibold text-md font-poppins py-' size='md' radius='full' color='primary' startContent={<SlidersHorizontalIcon/>}
+      <Button className='font-semibold text-md font-poppins self-center' size='md' radius='full' color='primary' startContent={<SlidersHorizontalIcon/>}
       onClick={onOpen}
       
       >
         Filter Audiobooks
       </Button>
+      <Divider/>
       
       </div>
-      <Divider/>
+      
 
      <Modal isOpen={isOpen} size='md' onOpenChange={onOpenChange} radius='md'>
       <ModalContent>
