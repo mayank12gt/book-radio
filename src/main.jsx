@@ -29,7 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}> 
       <Analytics />
       <App/>
-      <ReactQueryDevtools/>
+      {/* <ReactQueryDevtools/> */}
       
        </QueryClientProvider>
      

@@ -52,6 +52,22 @@ function Audioplayer() {
   };
 
   useEffect(() => {
+
+   
+      if (playlist) {
+      
+        const widget = document.getElementById('bmc-wbtn');
+
+        
+
+        if (widget) {
+          console.log("widget2 true")
+          
+          widget.style.bottom = "105px"
+        }
+      }
+   
+
     setCurrentEpisode(
       playlist?.find((ep) => {
         return ep?.isCurrent === true;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Switch } from '@nextui-org/react';
+import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spacer, Switch } from '@nextui-org/react';
 import {FilterIcon, MenuIcon, MoonIcon, Search, SearchIcon, SidebarCloseIcon, SunIcon, XIcon} from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -29,8 +29,8 @@ function NavBar() {
     classNames={{item:"font-semibold text-xl cursor-pointer",wrapper:"max-w-full flex-col h-fit md:flex-row gap-2 py-1 md:py-2 items-stretch md:items-center px-2 "
     }}
     >
-      <NavbarContent className='' justify='center'>
-        <NavbarBrand className=' text-2xl flex-grow-0 m-auto text-neutral-700 cursor-pointer justify-center font-poppins font-bold'>
+      <NavbarContent className='' justify='start'>
+        <NavbarBrand className=' text-2xl flex-grow-0 text-neutral-700 cursor-pointer justify-center font-poppins font-bold'>
           <NavLink to={`/`}>
           BookRadio
           </NavLink>
@@ -38,7 +38,9 @@ function NavBar() {
         {/* <NavbarMenuToggle
       icon={isMenuOpen?<XIcon />:<MenuIcon/>}
       className='md:hidden'/> */}
-         <NavbarItem >
+         <NavbarItem className='md:hidden ml-auto ' >
+
+         <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support Mayank&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
       
           
           
@@ -53,7 +55,7 @@ function NavBar() {
 
 
         <NavbarContent className='
-        flex-grow gap-8 '
+        flex-grow gap-8'
         justify='center'>
 
         <NavbarItem className='cursor-pointer px-0  w-full md:w-2/4'>
@@ -106,6 +108,18 @@ function NavBar() {
             
             />
           </NavbarItem>
+          
+          <NavbarItem className='hidden md:block ' >
+
+          <a href="https://www.buymeacoffee.com/BookRadio"><img src="https://img.buymeacoffee.com/button-api/?text=Support Mayank&emoji=🚀&slug=BookRadio&button_colour=40DCA5&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" className='h-10'/></a>
+
+ 
+ 
+
+  
+ 
+</NavbarItem>
+
         </NavbarContent>
 
         
